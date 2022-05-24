@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+<img src='https://github.com/HM-Anwar/Login-Button-Animation/blob/master/gif/LoginScreen.gif' height = 500>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
