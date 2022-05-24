@@ -14,7 +14,15 @@ class HomePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Login Button Animation"),
+          elevation: 2,
+          backgroundColor: Colors.blueAccent,
+          title: const Text(
+            "LOGIN BUTTON ANIMATION",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           centerTitle: true,
         ),
         body: const LoginScreen(),

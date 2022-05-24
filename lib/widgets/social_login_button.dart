@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:loading_overlay_pro/animations/bouncing_line.dart';
 
-import '../screens/login_screen.dart';
-
 class SocialLoginButton extends StatelessWidget {
-  const SocialLoginButton({
-    Key? key,
-    required this.isLoading,
-    required this.onPress,
-    required this.icon,
-    required this.title,
-    required this.selectedButton,
-  }) : super(key: key);
+  const SocialLoginButton(
+      {Key? key,
+      required this.isLoading,
+      required this.onPress,
+      required this.icon,
+      required this.title})
+      : super(key: key);
 
   final bool isLoading;
-  final Login selectedButton;
-
   final Function() onPress;
   final String icon;
   final String title;

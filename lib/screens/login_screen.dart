@@ -1,81 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loginbutton_animation/widgets/social_login_button.dart';
 
-enum Login { apple, google, twitter, facebook }
+import '../application/login_bloc.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  Login? selectedButton;
-  bool isLoading = false;
-
-  @override
   Widget build(BuildContext context) {
-    print(selectedButton);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(height: 24),
-        SocialLoginButton(
-          title: 'Continue with Apple',
-          onPress: () {
-            selectedButton = Login.apple;
-            setState(() {
-              isLoading = !isLoading;
-            });
-          },
-          isLoading: isLoading,
-          icon: 'assets/images/appleLogo.png',
-          selectedButton: selectedButton!,
-        ),
-        const SizedBox(height: 18),
-        SocialLoginButton(
-          title: 'Continue with Google',
-          onPress: () {
-            selectedButton = Login.google;
-
-            setState(() {
-              isLoading = !isLoading;
-            });
-          },
-          isLoading: isLoading,
-          icon: 'assets/images/googleLogo.png',
-          selectedButton: selectedButton!,
-        ),
-        const SizedBox(height: 18),
-        SocialLoginButton(
-          title: 'Continue with Twitter',
-          onPress: () {
-            selectedButton = Login.twitter;
-
-            setState(() {
-              isLoading = !isLoading;
-            });
-          },
-          isLoading: isLoading,
-          icon: 'assets/images/twitterLogo.png',
-          selectedButton: selectedButton!,
-        ),
-        const SizedBox(height: 18),
-        SocialLoginButton(
-          title: 'Continue with Facebook',
-          onPress: () {
-            selectedButton = Login.facebook;
-
-            setState(() {
-              isLoading = !isLoading;
-            });
-          },
-          icon: 'assets/images/facebookLogo.png',
-          isLoading: isLoading,
-          selectedButton: selectedButton!,
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: BlocBuilder<LoginBloc, LoginState>(
+        builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 24),
+              SocialLoginButton(
+                title: 'Continue with Apple',
+                onPress: () =>
+                    context.read<LoginBloc>().add(OnAppleButtonPressed()),
+                isLoading: state.isAppleButtonLoading,
+                icon: 'assets/images/appleLogo.png',
+              ),
+              const SizedBox(height: 18),
+              SocialLoginButton(
+                title: 'Continue with Google',
+                onPress: () =>
+                    context.read<LoginBloc>().add(OnGoogleButtonPressed()),
+                isLoading: state.isGoogleButtonLoading,
+                icon: 'assets/images/googleLogo.png',
+              ),
+              const SizedBox(height: 18),
+              SocialLoginButton(
+                title: 'Continue with Twitter',
+                onPress: () =>
+                    context.read<LoginBloc>().add(OnTwitterButtonPressed()),
+                isLoading: state.isTwitterButtonLoading,
+                icon: 'assets/images/twitterLogo.png',
+              ),
+              const SizedBox(height: 18),
+              SocialLoginButton(
+                title: 'Continue with Facebook',
+                onPress: () =>
+                    context.read<LoginBloc>().add(OnFacebookButtonPressed()),
+                icon: 'assets/images/facebookLogo.png',
+                isLoading: state.isFacebookButtonLoading,
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
